@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Word Pronouncation Ai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: grid;
+      place-content: center;
+      justify-items: center;
+      place-items: center;
+      margin: auto;
+      /* height: 100%; */
+      font-family: "Poppins", sans-serif;
+      padding: 2rem;
+      height: 100vh;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      max-width: 400px;
+      margin: auto;
+      width: 300px;
+      height: 400px;
+      padding: 2rem;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      background-color: white;
+      box-shadow: 5px 5px 30px 10px rgba(48, 47, 47, 0.205);
+      gap: 1rem;
+      border-radius: 5px;
+    }
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    header h1 {
+      display: flex;
+      flex-direction: column;
+      gap: 0rem;
+      font-size: 2.5rem;
+      text-align: center;
+      font-weight: 800;
+      color: #0b0b0c;
+    }
+    header p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      text-align: center;
+      color: #0b0b0c;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 1rem;
+      position: relative;
+    }
+    form input,
+    button {
+      height: 40px;
+      padding: 0rem 1rem;
+      border: none;
+      box-shadow: 2px 2px 20px 2px rgba(48, 47, 47, 0.205);
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: rgb(75, 75, 75);
+    }
+    form input {
+      background-color: rgb(218, 216, 216);
+      text-transform: capitalize;
+    }
+    form button {
+      background-color: #0b0b0c;
+      color: white;
+      letter-spacing: 1px;
+      outline: none;
+      transition: 0.5s;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+    form button:hover {
+      background-color: #121212;
+      outline: none;
+      transition: 0.5s;
+      color: rgb(73, 73, 73);
+      cursor: pointer;
+    }
+    form input.error {
+      border: 1px solid rgba(63, 5, 5, 0.918);
+      border-radius: 3px;
+      transition: 0.2s;
+    }
+
+    #error {
+      color: rgba(63, 5, 5, 0.918);
+      font-weight: 300;
+      font-size: 0.95rem;
+    }
+    .clear {
+      position: absolute;
+      right: 15px;
+      top: 22px;
+      font-size: 1.3rem;
+      font-weight: 300;
+      /* visibility: hidden; */
+      cursor: pointer;
+    }
+    .author {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+    .author span {
+      font-size: 1rem;
+      font-weight: 300;
+      visibility: hidden;
+    }
+    .social {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .social a {
+      text-decoration: none;
+      color: #121212;
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+    .social a:hover {
+      text-decoration: underline;
+      text-decoration-color: #121212;
+      text-underline-offset: 7px;
+    }
+    @media (max-width: 600px) {
+      main {
+        width: 300px;
+        max-width: 300px;
+        box-shadow: none;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+  <body>
+    <main>
+      <header>
+        <h1><span> Pronounciation</span> <span>Ai</span></h1>
+        <p>Input any you want our ai to help you pronounce</p>
+      </header>
+      <form id="form">
+        <span id="error"></span>
+        <input type="text" class="" placeholder="Enter Word" id="input" />
+        <span class="clear">x</span>
+        <button type="submit" id="click">Pronounce</button>
+      </form>
+      <div class="author">
+        <span>@ ozuma friday</span>
+        <div class="social">
+          <a href="https://github.com/Ohzuma" target="_blank">Github</a>
+          <a href="https://twitter.com/Ohzvma" target="_blank">X</a>
+        </div>
+      </div>
+    </main>
+    <script>
+      const form = document.getElementById("form");
+      let input = document.getElementById("input");
+      let errorInput = document.getElementById("error");
+      const clear = document.querySelector(".clear");
+
+      clear.addEventListener("click", () => {
+        input.value = "";
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+
+          try {
+            if (input.value === "") {
+              throw "Input must not be empty";
+            }
+            let utterance = new SpeechSynthesisUtterance(input.value);
+            utterance.voice = window.speechSynthesis.getVoices()[2];
+            speechSynthesis.speak(utterance);
+          } catch (error) {
+            errorInput.textContent = error;
+            input.classList.add("error");
+
+            setTimeout(() => {
+              input.classList.remove("error");
+              errorInput.textContent = "";
+            }, 4000);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
