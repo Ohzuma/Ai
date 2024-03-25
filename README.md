@@ -10,4 +10,4 @@ ozuma friday
 ## Project Status
 Hoping to add some useful thing to like adding dictionary
  ## Visuals
-https://github.com/Ohzuma/Ai/blob/main/AI.png
+![AI](https://github.com/Ohzuma/Ai/assets/86486923/ceb2d8a5-9111-43bf-a58d-532ccede6b1e)
